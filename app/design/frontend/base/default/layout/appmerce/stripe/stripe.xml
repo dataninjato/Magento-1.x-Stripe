@@ -1,0 +1,87 @@
+<!--
+/**
+ * Appmerce - Applications for Ecommerce
+ * http://www.appmerce.com
+ *
+ * @extension   Stripe
+ * @type        Payment method
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category    Magento
+ * @package     Appmerce_Stripe
+ * @copyright   Copyright (c) 2011-2019 Appmerce (http://www.appmerce.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<layout version="0.1.0">
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addlink" translate="label">
+                <name>appmerce_stripe_savedcc</name>
+                <path>stripe/savedcards</path>
+                <label>My Credit Cards</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <stripe_savedcards_index>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/appmerce/stripe/styles.css</stylesheet></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="stripe/customer_savedcards" name="appmerce_stripe_savedcards" template="appmerce/stripe/customer/savedcards.phtml"/>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+    </stripe_savedcards_index>
+
+    <stripe_savedcards_edit>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/appmerce/stripe/styles.css</stylesheet></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="stripe/customer_savedcards" name="appmerce_stripe_savedcards_edit" template="appmerce/stripe/customer/savedcards/edit.phtml"/>
+        </reference>
+    </stripe_savedcards_edit>
+
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/appmerce/stripe/styles.css</stylesheet></action>
+            <block type="core/text" name="appmerce.stripe.api">
+                <action method="setText">
+                    <text><![CDATA[<script src="https://js.stripe.com/v2/"></script>]]></text>
+                </action>
+            </block>
+            <action method="addItem"><type>js</type><name>appmerce/stripe/placeholders.js</name><params /><if>lte IE 9</if></action>
+            <action method="addJs" ifconfig="payment/stripe_cc/jquery_enabled"><script>appmerce/stripe/jquery.min.js</script></action>
+            <action method="addJs" ifconfig="payment/stripe_cc/jquery_enabled"><script>appmerce/stripe/jquery.noconflict.js</script></action>
+            <action method="addJs"><script>appmerce/stripe/jquery.payment.min.js</script></action>
+            <action method="addJs"><script>appmerce/stripe/build/stripe.js</script></action>
+        </reference>
+    </checkout_onepage_index>
+
+    <opc_index_index>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/appmerce/stripe/styles.css</stylesheet></action>
+            <block type="core/text" name="appmerce.stripe.api">
+                <action method="setText">
+                    <text><![CDATA[<script src="https://js.stripe.com/v2/"></script>]]></text>
+                </action>
+            </block>
+            <action method="addItem"><type>js</type><name>appmerce/stripe/placeholders.js</name><params /><if>lte IE 9</if></action>
+            <action method="addJs" ifconfig="payment/stripe_cc/jquery_enabled"><script>appmerce/stripe/jquery.min.js</script></action>
+            <action method="addJs" ifconfig="payment/stripe_cc/jquery_enabled"><script>appmerce/stripe/jquery.noconflict.js</script></action>
+            <action method="addJs"><script>appmerce/stripe/jquery.payment.min.js</script></action>
+            <action method="addJs"><script>appmerce/stripe/build/stripe.js</script></action>
+        </reference>
+    </opc_index_index>
+
+</layout>
